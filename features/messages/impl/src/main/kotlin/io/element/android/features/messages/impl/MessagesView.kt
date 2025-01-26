@@ -112,6 +112,7 @@ fun MessagesView(
     onEventContentClick: (event: TimelineItem.Event) -> Boolean,
     onUserDataClick: (UserId) -> Unit,
     onLinkClick: (String) -> Unit,
+    onHelpLinkClick: (String) -> Unit,
     onSendLocationClick: () -> Unit,
     onCreatePollClick: () -> Unit,
     onJoinCallClick: () -> Unit,
@@ -202,6 +203,7 @@ fun MessagesView(
                 onMessageLongClick = ::onMessageLongClick,
                 onUserDataClick = { hidingKeyboard { onUserDataClick(it) } },
                 onLinkClick = onLinkClick,
+                onHelpLinkClick = onHelpLinkClick,
                 onReactionClick = ::onEmojiReactionClick,
                 onReactionLongClick = ::onEmojiReactionLongClick,
                 onMoreReactionsClick = ::onMoreReactionsClick,
@@ -274,6 +276,7 @@ private fun MessagesViewContent(
     onContentClick: (TimelineItem.Event) -> Unit,
     onUserDataClick: (UserId) -> Unit,
     onLinkClick: (String) -> Unit,
+    onHelpLinkClick: (String) -> Unit,
     onReactionClick: (key: String, TimelineItem.Event) -> Unit,
     onReactionLongClick: (key: String, TimelineItem.Event) -> Unit,
     onMoreReactionsClick: (TimelineItem.Event) -> Unit,
@@ -382,7 +385,7 @@ private fun MessagesViewContent(
                 MessagesViewComposerBottomSheetContents(
                     subcomposing = subcomposing,
                     state = state,
-                    onLinkClick = onLinkClick,
+                    onHelpLinkClick = onHelpLinkClick,
                 )
             },
             sheetContentKey = sheetResizeContentKey.intValue,
@@ -396,7 +399,7 @@ private fun MessagesViewContent(
 private fun MessagesViewComposerBottomSheetContents(
     subcomposing: Boolean,
     state: MessagesState,
-    onLinkClick: (String) -> Unit,
+    onHelpLinkClick: (String) -> Unit,
 ) {
     if (state.userEventPermissions.canSendMessage) {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -422,7 +425,7 @@ private fun MessagesViewComposerBottomSheetContents(
                 state.composerState.textEditorState is TextEditorState.Markdown) {
                 IdentityChangeStateView(
                     state = state.identityChangeState,
-                    onLinkClick = onLinkClick,
+                    onHelpLinkClick = onHelpLinkClick,
                 )
             }
             MessageComposerView(
@@ -538,6 +541,7 @@ internal fun MessagesViewPreview(@PreviewParameter(MessagesStateProvider::class)
         onEventContentClick = { false },
         onUserDataClick = {},
         onLinkClick = {},
+        onHelpLinkClick = {},
         onSendLocationClick = {},
         onCreatePollClick = {},
         onJoinCallClick = {},

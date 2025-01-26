@@ -26,7 +26,7 @@ import io.element.android.libraries.ui.strings.CommonStrings
 @Composable
 fun IdentityChangeStateView(
     state: IdentityChangeState,
-    onLinkClick: (String) -> Unit,
+    onHelpLinkClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     // Pick the first identity change to PinViolation
@@ -73,7 +73,7 @@ fun IdentityChangeStateView(
                     url = LinkAnnotation.Url(
                         url = LearnMoreConfig.IDENTITY_CHANGE_URL,
                         linkInteractionListener = {
-                            onLinkClick(LearnMoreConfig.IDENTITY_CHANGE_URL)
+                            onHelpLinkClick(LearnMoreConfig.IDENTITY_CHANGE_URL)
                         }
                     ),
                     start = learnMoreStartIndex,
@@ -93,6 +93,6 @@ internal fun IdentityChangeStateViewPreview(
 ) = ElementPreview {
     IdentityChangeStateView(
         state = state,
-        onLinkClick = {},
+        onHelpLinkClick = {},
     )
 }
